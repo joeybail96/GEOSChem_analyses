@@ -21,6 +21,20 @@ base_nc = xr.open_dataset(base_nc_file)
 
 # Plot NACHTT diurnal variation in following:
     # ClNO2
-plotter.plot_diurnal_variation(nachtt_nc, 'ClNO2_pptv', local_offset=-7, ylabel='ClNO₂ (ppbv)')
+
+ClNO2_diurnal_fig = '../figures/ClNO2_diurnal.png'
+plotter.plot_diurnal_variation(nachtt_nc, 'ClNO2_pptv', scale_factor=1, time_var='time', local_offset=-7, ylabel='Observed (pptv)',
+                               second_dataset=base_nc, second_variable_name='ClNO2', second_scale_factor=1e12, second_time_var='time_UTC', second_ylabel='Modeled (pptv)',
+                               primary_ylim=(-0.2,50), secondary_ylim=(-0.2,10), fig_save_path=ClNO2_diurnal_fig)
 
 
+Cl2_diurnal_fig = '../figures/Cl2_diurnal.png'
+plotter.plot_diurnal_variation(nachtt_nc, 'Cl2_pptv', scale_factor=1, time_var='time', local_offset=-7, ylabel='Observed (pptv)',
+                               second_dataset=base_nc, second_variable_name='Cl2', second_scale_factor=1e12, second_time_var='time_UTC', second_ylabel='Modeled (pptv)',
+                               primary_ylim=(-5.99,5.99), secondary_ylim=(-0.02, 0.52), fig_save_path=Cl2_diurnal_fig)
+
+
+Cl_diurnal_fig = '../figures/Cl_diurnal.png'
+plotter.plot_diurnal_variation(nachtt_nc, 'AMS_pCl_ugm3', scale_factor=1, time_var='time', local_offset=-7, ylabel='Observed (ug m^-3)',
+                               second_dataset=base_nc, second_variable_name='Cl', second_scale_factor=1, second_time_var='time_UTC', second_ylabel='Modeled (ug m^-3)',
+                               primary_ylim=(-0.01,0.1), secondary_ylim=(-0.01,0.1), fig_save_path=Cl_diurnal_fig)
